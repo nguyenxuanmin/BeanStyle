@@ -71,22 +71,6 @@
                     $('#submitForm').on('submit', function(e){
                         e.preventDefault();
                         var formData = new FormData(this);
-                        let timerInterval;
-                        Swal.fire({
-                            title: "Đang thực hiện",
-                            timer: 8000,
-                            timerProgressBar: true,
-                            didOpen: () => {
-                                Swal.showLoading();
-                                const timer = Swal.getPopup().querySelector("b");
-                                timerInterval = setInterval(() => {
-                                timer.textContent = `${Swal.getTimerLeft()}`;
-                                }, 100);
-                            },
-                            willClose: () => {
-                                clearInterval(timerInterval);
-                            }
-                        });
                         $.ajax({
                             url: urlSubmit,
                             headers: {
@@ -97,34 +81,40 @@
                             contentType: false,
                             processData: false, 
                             success: function(response) {
-                                setTimeout(function() {
-                                    if (response.success == true) {
-                                        Swal.fire({
-                                            text: "Thành công!",
-                                            icon: "success",
-                                            showConfirmButton: false,
-                                            timer: 1500
-                                        }).then((result) => {
-                                            if(urlComplete != ""){
-                                                location.href = urlComplete;
-                                            }else{
-                                                location.reload();
-                                            }
-                                        });
-                                    }else{
-                                        Swal.fire({
-                                            text: response.message,
-                                            icon: "error",
-                                            showConfirmButton: false,
-                                            timer: 2000
-                                        });
-                                    }
-                                }, 1500);
+                                if (response.success == true) {
+                                    Swal.fire({
+                                        text: "Thành công!",
+                                        icon: "success",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    }).then((result) => {
+                                        if(urlComplete != ""){
+                                            location.href = urlComplete;
+                                        }else{
+                                            location.reload();
+                                        }
+                                    });
+                                }else{
+                                    Swal.fire({
+                                        text: response.message,
+                                        icon: "error",
+                                        showConfirmButton: false,
+                                        timer: 2000
+                                    });
+                                }
                             },
                             error: function(xhr) {
                                 console.log(xhr);
                             }
                         });
+                    });
+                }
+
+                if ($('.currency-input').length) {
+                    $('.currency-input').on('input', function () {
+                        let value = $(this).val().replace(/[^0-9]/g, '');
+                        let formatted = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                        $(this).val(formatted);
                     });
                 }
             });

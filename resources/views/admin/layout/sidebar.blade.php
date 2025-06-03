@@ -12,8 +12,33 @@
         <nav class="mt-2">
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="" class="nav-link active">
-                        <i class="nav-icon fa-solid fa-book-open"></i> <p>Danh sách khóa học</p>
+                    <a href="{{route('list_category')}}" class="nav-link">
+                        <i class="fa-solid fa-layer-group"></i> <p>Danh mục sản phẩm</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('list_sub_category')}}" class="nav-link">
+                        <i class="fa-solid fa-cube"></i> <p>Danh mục sản phẩm cấp 1</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('list_brand')}}" class="nav-link">
+                        <i class="fa-solid fa-bandage"></i> <p>Thương hiệu</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('list_size')}}" class="nav-link">
+                        <i class="fa-solid fa-expand"></i> <p>Kích thước</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('list_color')}}" class="nav-link">
+                        <i class="fa-solid fa-palette"></i> <p>Màu sắc</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('list_product')}}" class="nav-link">
+                        <i class="fa-solid fa-shop"></i> <p>Sản phẩm</p>
                     </a>
                 </li>
             </ul>

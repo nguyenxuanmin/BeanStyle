@@ -15,6 +15,11 @@ use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductSizeController;
+use App\Http\Controllers\Admin\ProductColorController;
+use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\BenefitController;
+use App\Http\Controllers\Admin\CollectionController;
+use App\Http\Controllers\Client\HomeController;
 
 Route::group(['middleware' => [SystemAuth::class]], function () {
     Route::group(['middleware' => [AdminAuth::class]], function () {
@@ -62,19 +67,42 @@ Route::group(['middleware' => [SystemAuth::class]], function () {
         Route::post('/product/delete', [ProductController::class, 'delete'])->name('delete_product');
         Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('edit_product');
         Route::get('/product/search', [ProductController::class, 'search'])->name('search_product');
-        // Kích thước Sản phẩm
+        // Kích thước sản phẩm
         Route::get('/product-size/{id}', [ProductSizeController::class, 'update'])->name('update_product_size');
         Route::post('/product-size/save', [ProductSizeController::class, 'save'])->name('save_product_size');
         Route::post('/product-size/delete', [ProductSizeController::class, 'delete'])->name('delete_product_size');
+        // Màu sắc sản phẩm
+        Route::get('/product-color/{id}', [ProductColorController::class, 'update'])->name('update_product_color');
+        Route::post('/product-color/save', [ProductColorController::class, 'save'])->name('save_product_color');
+        Route::post('/product-color/delete', [ProductColorController::class, 'delete'])->name('delete_product_color');
+        // Slider
+        Route::get('/slider', [SliderController::class, 'show'])->name('list_slider');
+        Route::get('/slider/add', [SliderController::class, 'add'])->name('add_slider');
+        Route::post('/slider/save', [SliderController::class, 'save'])->name('save_slider');
+        Route::post('/slider/delete', [SliderController::class, 'delete'])->name('delete_slider');
+        Route::get('/slider/edit/{id}', [SliderController::class, 'edit'])->name('edit_slider');
+        Route::get('/slider/search', [SliderController::class, 'search'])->name('search_slider');
+        // Lợi ích
+        Route::get('/benefit', [BenefitController::class, 'show'])->name('list_benefit');
+        Route::get('/benefit/add', [BenefitController::class, 'add'])->name('add_benefit');
+        Route::post('/benefit/save', [BenefitController::class, 'save'])->name('save_benefit');
+        Route::post('/benefit/delete', [BenefitController::class, 'delete'])->name('delete_benefit');
+        Route::get('/benefit/edit/{id}', [BenefitController::class, 'edit'])->name('edit_benefit');
+        Route::get('/benefit/search', [BenefitController::class, 'search'])->name('search_benefit');
+        // Bộ sưu tập
+        Route::get('/collection', [CollectionController::class, 'show'])->name('list_collection');
+        Route::get('/collection/add', [CollectionController::class, 'add'])->name('add_collection');
+        Route::post('/collection/save', [CollectionController::class, 'save'])->name('save_collection');
+        Route::post('/collection/delete', [CollectionController::class, 'delete'])->name('delete_collection');
+        Route::get('/collection/edit/{id}', [CollectionController::class, 'edit'])->name('edit_collection');
+        Route::get('/collection/search', [CollectionController::class, 'search'])->name('search_collection');
     });
     Route::group(['middleware' => [LoginAuth::class]], function () {
         Route::get('/admin/login', function () {return view('admin.login');})->name('login');
         Route::post('/admin/login', [AdminController::class, 'login'])->name('login');
     });
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    Route::get('/', [HomeController::class, 'index'])->name('index');
 });
 
 Route::group(['middleware' => [CheckSystemAuth::class]], function () {

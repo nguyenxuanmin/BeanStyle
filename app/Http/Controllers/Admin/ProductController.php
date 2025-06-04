@@ -17,7 +17,7 @@ class ProductController extends Controller
     }
 
     public function show(){
-        $products = Product::with(['productSizes.size','brand','subCategory'])->orderBy('product_code','asc')->paginate(20);
+        $products = Product::with(['productSizes.size','brand','productColors.productImages'])->orderBy('product_code','asc')->paginate(20);
         return view('admin.product.list',[
             'products' => $products,
             'infoSearch' => ''
@@ -127,7 +127,10 @@ class ProductController extends Controller
 
     public function search(Request $request){
         $infoSearch = $request->search;
-        $products = Product::with(['productSizes.size','brand','subCategory'])->where('name','LIKE','%'.$infoSearch.'%')->orWhere('product_code','LIKE','%'.$infoSearch.'%')->orderBy('product_code','asc')->paginate(20);
+        $products = Product::with(['productSizes.size','brand','productColors.productImages'])
+        ->where('name','LIKE','%'.$infoSearch.'%')
+        ->orWhere('product_code','LIKE','%'.$infoSearch.'%')
+        ->orderBy('product_code','asc')->paginate(20);
 
         return view('admin.product.list',[
             'infoSearch' => $infoSearch,

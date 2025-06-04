@@ -12,7 +12,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{route('list_category')}}">Danh mục sản phẩm</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('list_slider')}}">Slider</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{$titlePage}}</li>
                     </ol>
                 </div>
@@ -22,25 +22,21 @@
     <div class="app-content">
         <div class="container-fluid">
             <div class="card card-primary card-outline mb-4">
-                <form id="submitForm" enctype="multipart/form-data" data-url-submit="{{route('save_category')}}" data-url-complete="{{route('list_category')}}">
+                <form id="submitForm" enctype="multipart/form-data" data-url-submit="{{route('save_slider')}}" data-url-complete="{{route('list_slider')}}">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label">Tên danh mục sản phẩm</label>
-                                    <input type="text" class="form-control" name="name" value="@if (isset($category)){{$category->name}}@endif">
+                                    <label class="form-label">Tên slider</label>
+                                    <input type="text" class="form-control" name="name" value="@if (isset($slider)){{$slider->name}}@endif">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Hình ảnh</label>
                                     <input type="file" class="form-control mb-3" name="image" id="imageUpload" accept="image/*">
                                     <div class="imageContent">
-                                        <img id="imageContent" src="@if (isset($category) && !empty($category->image)){{asset('storage/categories/' . basename($category->image))}}@else{{asset('library/admin/default-image.png')}}@endif" alt="Image preview" style="max-width: 100%; max-height: 150px;">
+                                        <img id="imageContent" src="@if (isset($slider) && !empty($slider->image)){{asset('storage/sliders/' . basename($slider->image))}}@else{{asset('library/admin/default-image.png')}}@endif" alt="Image preview" style="max-width: 100%; max-height: 300px;">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 mb-3">
-                                <label class="form-label">Nội dung</label>
-                                <textarea name="content" id="contentSummernote">@if (isset($category)){{$category->content}}@endif</textarea>
                             </div>
                             <div class="col-12 mb-3 text-end">
                                 @if ($action == 'add')
@@ -48,12 +44,12 @@
                                 @else
                                     <button class="btn btn-info">Cập nhật</button>
                                 @endif
-                                <a href="{{route('list_category')}}" class="btn btn-dark">Trở lại</a>
+                                <a href="{{route('list_slider')}}" class="btn btn-dark">Trở lại</a>
                             </div>
                         </div>
                     </div>
                     <input type="hidden" name="action" value="{{$action}}">
-                    <input type="hidden" name="id" value="@if (isset($category)){{$category->id}}@endif">
+                    <input type="hidden" name="id" value="@if (isset($slider)){{$slider->id}}@endif">
                 </form>
             </div>
         </div>

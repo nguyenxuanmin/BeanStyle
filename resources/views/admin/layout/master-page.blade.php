@@ -1,14 +1,10 @@
-@php
-    $company = DB::select("SELECT * FROM companies");
-    $currentUrl = $_SERVER['REQUEST_URI'];
-@endphp
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        @if (count($company) && $company[0]->favicon != "")
-            <link rel="icon" href="{{asset('storage/company/favicon/'.$company[0]->favicon)}}" type="favicon">
+        @if (!empty($company->favicon))
+            <link rel="icon" href="{{asset('storage/company/favicon/'.$company->favicon)}}" type="favicon">
         @endif
         <title>@yield('title')</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css" integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q=" crossorigin="anonymous"/>

@@ -1,8 +1,8 @@
 <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
     <div class="sidebar-brand">
         <a href="{{route('admin')}}" class="brand-link">
-            @if (count($company) && $company[0]->logo != "")
-                <img src="{{asset('storage/company/logo/'.$company[0]->logo)}}" alt="{{$company[0]->name}}" class="brand-image opacity-75 shadow" />
+            @if (!empty($company->logo))
+                <img src="{{asset('storage/company/logo/'.$company->logo)}}" alt="{{$company->name}}" class="brand-image opacity-75 shadow" />
             @else
                 <img src="{{asset('library/admin/AdminLTEFullLogo.png')}}" alt="AdminLTE Logo" class="brand-image opacity-75 shadow" />
             @endif
@@ -39,6 +39,21 @@
                 <li class="nav-item">
                     <a href="{{route('list_product')}}" class="nav-link">
                         <i class="fa-solid fa-shop"></i> <p>Sản phẩm</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('list_slider')}}" class="nav-link">
+                        <i class="fa-solid fa-images"></i> <p>Slider</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('list_benefit')}}" class="nav-link">
+                        <i class="fa-solid fa-gift"></i> <p>Lợi ích</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('list_collection')}}" class="nav-link">
+                        <i class="fa-solid fa-images"></i> <p>Bộ sưu tập</p>
                     </a>
                 </li>
             </ul>

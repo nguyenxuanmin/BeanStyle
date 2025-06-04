@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Category;
+use App\Models\Collection;
 use App\Services\AdminService;
 
-class CategoryController extends Controller
+class CollectionController extends Controller
 {
     public function __construct()
     {
@@ -16,37 +16,35 @@ class CategoryController extends Controller
     }
 
     public function show(){
-        $categories = Category::orderBy('name','asc')->paginate(20);
-        return view('admin.category.list',[
-            'categories' => $categories,
+        $collections = Collection::orderBy('id','asc')->paginate(20);
+        return view('admin.collection.list',[
+            'collections' => $collections,
             'infoSearch' => ''
         ]);
     }
 
     public function add(){
-        $titlePage = "Thêm danh mục sản phẩm";
+        $titlePage = "Thêm bộ sưu tập";
         $action = "add";
-        return view('admin.category.main',[
+        return view('admin.collection.main',[
             'titlePage' => $titlePage,
             'action' => $action
         ]);
     }
 
     public function edit($id){
-        $titlePage = "Sửa danh mục sản phẩm";
+        $titlePage = "Sửa bộ sưu tập";
         $action = "edit";
-        $category = Category::find($id);
-        return view('admin.category.main',[
+        $collection = Collection::find($id);
+        return view('admin.collection.main',[
             'titlePage' => $titlePage,
             'action' => $action,
-            'category' => $category
+            'collection' => $collection
         ]);
     }
 
     public function save(Request $request){
         $name = $request->name;
-        $slug = $this->adminService->generateSlug($name);
-        $content = $request->content;
         if (isset($_FILES["image"])) {
             $image = $_FILES["image"]["name"];
         }else{
@@ -57,37 +55,31 @@ class CategoryController extends Controller
         if (empty($name)) {
             return response()->json([
                 'success' => false,
-                'message' => 'Tên danh mục sản phẩm không được để trống.'
+                'message' => 'Tên bộ sưu tập không được để trống.'
             ]);
         }
 
         if($action == "edit"){
-            $categoryExist = Category::where('slug',$slug)->where('id','<>',$request->id)->first();
+            $collection = Collection::find($request->id);
         }else{
-            $categoryExist = Category::where('slug',$slug)->first();
-        }
-        
-        if (isset($categoryExist)) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Tên danh mục sản phẩm đã tồn tại.'
-            ]);
-        }
+            if (empty($image)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Hình ảnh bộ sưu tập không được để trống.'
+                ]);
+            }
 
-        if($action == "edit"){
-            $category = Category::find($request->id);
-        }else{
-            $category = new Category();
+            $collection = new Collection();
         }
 
         if (!empty($image)) {
             if($action == "edit"){
-                $imagePath = 'categories/image/'.$category->image;
+                $imagePath = 'collections/'.$collection->image;
                 if (Storage::disk('public')->exists($imagePath)) {
                     Storage::disk('public')->delete($imagePath);
                 }
             }
-            $messageError = $this->adminService->generateImage($_FILES["image"],'categories');
+            $messageError = $this->adminService->generateImage($_FILES["image"],'collections');
             if($messageError != ""){
                 return response()->json([
                     'success' => false,
@@ -96,17 +88,13 @@ class CategoryController extends Controller
             }
         }
 
-        if($action == "edit"){
-            if (!$request->hasFile('image')) {
-                $image = $category->image;
-            }
+        if (!$request->hasFile('image')) {
+            $image = $collection->image;
         }
         
-        $category->name = $name;
-        $category->slug = $slug;
-        $category->content = $content;
-        $category->image = $image;
-        $category->save();
+        $collection->name = $name;
+        $collection->image = $image;
+        $collection->save();
 
         return response()->json([
             'success' => true,
@@ -115,12 +103,13 @@ class CategoryController extends Controller
     }
 
     public function delete(Request $request){
-        $category = Category::find($request->id);
-        $imagePath = 'categories/image/'.$category->image;
+        $collection = Collection::find($request->id);
+        $imagePath = 'collections/'.$collection->image;
         if (Storage::disk('public')->exists($imagePath)) {
             Storage::disk('public')->delete($imagePath);
         }
-        $category->delete();
+        $collection->delete();
+
         return response()->json([
             'success' => true
         ]);
@@ -128,10 +117,11 @@ class CategoryController extends Controller
 
     public function search(Request $request){
         $infoSearch = $request->search;
-        $categories = Category::where('name','LIKE','%'.$infoSearch.'%')->orderBy('name','asc')->paginate(20);
-        return view('admin.category.list',[
+        $collections = Collection::where('name','LIKE','%'.$infoSearch.'%')->orderBy('id','asc')->paginate(20);
+        
+        return view('admin.collection.list',[
             'infoSearch' => $infoSearch,
-            'categories' => $categories
+            'collections' => $collections
         ]);
     }
 }

@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\Services\AdminService;
+use App\Models\Company;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $company = Company::first();
+        View::share([
+            'company' => $company
+        ]);
     }
 }

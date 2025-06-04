@@ -42,6 +42,7 @@
                 <thead class="table-dark">
                     <tr>
                         <th scope="col" width="80px" class="text-center">STT</th>
+                        <th scope="col" width="100px"></th>
                         <th scope="col" width="150px">Mã sản phẩm</th>
                         <th scope="col">Tên sản phẩm</th>
                         <th scope="col" width="200px">Thương hiệu</th>
@@ -53,12 +54,19 @@
                 <tbody>
                     @if (count($products) == 0)
                         <tr>
-                            <td valign="middle" align="center" colspan="7">Không có dữ liệu</td>
+                            <td valign="middle" align="center" colspan="8">Không có dữ liệu</td>
                         </tr>
                     @endif
                     @foreach ($products as $key => $product)
                         <tr>
                             <td valign="middle" align="center">{{$key+1}}</td>
+                            <td valign="middle" align="center">
+                                @if (count($product->productColors))
+                                    <img src="{{asset('storage/products/' . basename($product->productColors[0]->productImages[0]->image))}}" alt="{{$product->name}}" class="object-fit-cover" style="max-width: 100%; max-height: 100px;">
+                                @else
+                                    <img src="{{asset('library/admin/default-image.png')}}" alt="{{$product->name}}" style="max-width: 100%; max-height: 100px;">
+                                @endif
+                            </td>
                             <td valign="middle">@if(empty($product->product_code)) Đang cập nhật @else{{$product->product_code}}@endif</td>
                             <td valign="middle">{{$product->name}}</td>
                             <td valign="middle">@if(!empty($product->brand_id)){{$product->brand->name}}@endif</td>
@@ -76,7 +84,7 @@
                             </td>
                             <td valign="middle" align="center">
                                 <a href="{{route('update_product_size',[$product->id])}}" class="btn btn-outline-success" title="Cập nhật kích thước sản phẩm"><i class="fa-solid fa-expand"></i></a>
-                                <a href="" class="btn btn-outline-secondary" title="Thêm màu sắc"><i class="fa-solid fa-palette"></i></a>
+                                <a href="{{route('update_product_color',[$product->id])}}" class="btn btn-outline-secondary" title="Thêm màu sắc"><i class="fa-solid fa-palette"></i></a>
                                 <a href="{{route('edit_product',[$product->id])}}" class="btn btn-outline-info" title="Sửa"><i class="fa-solid fa-pen-to-square"></i></a>
                                 <button class="btn btn-outline-danger" title="Xóa" onclick="deleteItem({{$product->id}},'sản phẩm','{{route('delete_product')}}');"><i class="fa-solid fa-trash"></i></button>
                             </td>

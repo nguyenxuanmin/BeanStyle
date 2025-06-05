@@ -32,5 +32,35 @@
         <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="{{asset('js/index.js')}}"></script>
+            <script>
+                $(document).ready(function() {
+                    if ($('#countdown').length) {
+                        var endDate = new Date();
+                        endDate.setDate(endDate.getDate() + 200);
+
+                        function updateCountdown() {
+                            var now = new Date();
+                            var diff = endDate - now;
+
+                            if (diff <= 0) {
+                                $('#countdown').html("Đã kết thúc!");
+                                return;
+                            }
+
+                            var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                            var hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                            var minutes = Math.floor((diff / 1000 / 60) % 60);
+                            var seconds = Math.floor((diff / 1000) % 60);
+
+                            $('#countdownDays').text(days);
+                            $('#countdownHours').text(String(hours).padStart(2, '0'));
+                            $('#countdownMinutes').text(String(minutes).padStart(2, '0'));
+                            $('#countdownSeconds').text(String(seconds).padStart(2, '0'));
+                        }
+                        updateCountdown();
+                        setInterval(updateCountdown, 1000);
+                    }
+                });
+            </script>
     </body>
 </html>

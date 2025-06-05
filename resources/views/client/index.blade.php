@@ -15,6 +15,8 @@
                 @endforeach
             </div>
         </section>
+    @endif
+    @if (count($benefits))
         <section class="section-benefit">
             <div class="container">
                 <div class="row">
@@ -31,6 +33,93 @@
                             </div>
                         </div>
                     @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+    @if (count($collections))
+        <section class="section-collection">
+            <div class="container">
+                <div class="row">
+                    @foreach ($collections as $item)
+                        <div class="col-12 col-md-6 col-lg-3 mb-4 lg-mb-0">
+                            <div class="item-collection">
+                                <img src="{{asset('storage/collections/'.$item->image)}}" alt="{{$item->name}}" class="w-100 h-100 object-fit-cover">
+                                <div class="item-collection-info">
+                                    <h3>{{$item->name}}</h3>
+                                    <a href="" title="Xem chi tiết">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+    @if (count($categories))
+        <section class="section-category">
+            <div class="container">
+                <div class="item-category-title"><h2>Danh mục nổi bật</h2></div>
+                <div class="item-category">
+                    @foreach ($categories as $item)
+                        @php
+                            $productCount = $item->subCategories->sum('products_count');
+                        @endphp
+                        <div class="item-category-info">
+                            <a href="" title="{{$item->name}}">
+                                <img src="{{asset('storage/categories/'.$item->image)}}" alt="{{$item->name}}" class="object-fit-cover">
+                                <div class="item-category-content">
+                                    <h3>{{$item->name}}</h3>
+                                    <span>{{$productCount}}</span>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+    @if (count($saleProducts))
+        <section class="section-sale-product">
+            <div class="container">
+                <div class="item-sale-product">
+                    <div class="item-sale-product-header">
+                        <h2>
+                            <a href="" title="FLASH SALE">
+                                <img src="{{asset('library/client/flash.webp')}}" alt="FLASH SALE" class="object-fit-cover">
+                                FLASH SALE
+                            </a>
+                        </h2>
+                        <div class="item-sale-product-count-down" id="countdown">
+                            <p><span id="countdownDays">0</span><span>Ngày</span></p>
+                            <p><span id="countdownHours">0</span></p>
+                            <p><span id="countdownMinutes">0</span></p>
+                            <p><span id="countdownSeconds">0</span></p>
+                        </div>
+                    </div>
+                    <div class="my-product mx-15">
+                        @foreach ($saleProducts as $item)
+                            @php
+                                $price = $item->productSizes[0]->price;
+                                $discount = $item->productSizes[0]->discount;
+                                $flashSale = (($price - $discount) / $price) * 100;
+                            @endphp
+                            <div class="px-15">
+                                <div class="item-product">
+                                    <div class="item-product-image">
+                                        <a href="">
+                                            <img src="{{asset('storage/products/'.$item->productColors[0]->productImages[0]->image)}}" alt="{{$item->name}}" class="w-100 h-100 object-fit-cover">
+                                        </a>
+                                    </div>
+                                    <div class="item-product-info">
+                                        <h3><a href="" title="{{$item->name}}">{{$item->name}}</a></h3>
+                                        <span class="item-product-discount">{{number_format($discount, 0, ',', '.')}}đ</span><span class="item-product-flash-sale">-{{round($flashSale)}}%</span>
+                                        <span class="item-product-price">{{number_format($price, 0, ',', '.')}}₫</span>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </section>

@@ -64,6 +64,7 @@ class ProductController extends Controller
         $brandId = $request->brand;
         $description = $request->description;
         $status = $request->has('status') ? 1 : 0;
+        $isSale = $request->has('isSale') ? 1 : 0;
         $content = $request->content;
         $action = $request->action;
 
@@ -108,6 +109,7 @@ class ProductController extends Controller
         $product->description = $description;
         $product->content = $content;
         $product->status = $status;
+        $product->isSale = $isSale;
         $product->save();
 
         return response()->json([

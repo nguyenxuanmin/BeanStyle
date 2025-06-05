@@ -42,6 +42,10 @@
                                     <label class="form-label">Tình trạng</label>
                                     <input type="checkbox" class="form-check-input" name="status" @if (!isset($product) || (isset($product) && $product->status == 1)) checked @endif>
                                 </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Đang sale</label>
+                                    <input type="checkbox" class="form-check-input" name="isSale" @if ((isset($product) && $product->isSale == 1)) checked @endif>
+                                </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="mb-3">

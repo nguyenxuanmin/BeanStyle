@@ -15,5 +15,24 @@
                 @endforeach
             </div>
         </section>
+        <section class="section-benefit">
+            <div class="container">
+                <div class="row">
+                    @foreach ($benefits as $item)
+                        <div class="col-6 col-lg-3">
+                            <div class="item-benefit">
+                                <div class="item-benefit-image">
+                                    <img src="{{asset('storage/benefits/'.$item->image)}}" alt="{{$item->name}}" class="object-fit-cover">
+                                </div>
+                                <div class="item-benefit-info">
+                                    <h3>{{$item->name}}</h3>
+                                    <span>{{$item->description}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
     @endif
 @endsection

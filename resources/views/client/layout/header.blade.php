@@ -109,5 +109,42 @@
                 @endif
             </a>
         </div>
+        <ul class="item-nav-mobile">
+            <li>
+                <a href="" title="Trang chủ" @if (strpos($currentUrl, '') !== false) class="active" @endif>Trang chủ</a>
+            </li>
+            <li>
+                <a href="" title="Giới thiệu" @if (strpos($currentUrl, 'gioi-thieu') !== false) class="active" @endif>Giới thiệu</a>
+            </li>
+            <li>
+                <a href="#" title="Sản phẩm" @if (strpos($currentUrl, 'san-pham') !== false) class="active" @endif>Sản phẩm</a>
+                <i class="fa-solid fa-angle-right toggle"></i>
+
+                <ul class="sub-menu ps-2" style="display: none;">
+                    @foreach ($categories as $category)
+                        <li>
+                            <a href="#" title="{{ $category->name }}">{{ $category->name }}</a>
+
+                            @if (count($category->subCategories))
+                                <i class="fa-solid fa-angle-right toggle"></i>
+                                <ul class="sub-menu ps-2" style="display: none;">
+                                    @foreach ($category->subCategories as $subCategory)
+                                        <li>
+                                            <a href="#" title="{{ $subCategory->name }}">{{ $subCategory->name }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </li>
+                    @endforeach
+                </ul>
+            </li>
+            <li>
+                <a href="" title="Tin tức" @if (strpos($currentUrl, 'tin-tuc') !== false) class="active" @endif>Tin tức</a>
+            </li>
+            <li>
+                <a href="" title="Liên hệ" @if (strpos($currentUrl, 'lien-he') !== false) class="active" @endif>Liên hệ</a>
+            </li>
+        </ul>
     </div>
 </header>

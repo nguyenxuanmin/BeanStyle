@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\SubCategory;
+use App\Models\Collection;
 use App\Services\AdminService;
 
 class ProductController extends Controller
@@ -28,6 +29,7 @@ class ProductController extends Controller
         $titlePage = "Thêm sản phẩm";
         $action = "add";
         $brands = Brand::orderBy('name','asc')->get();
+        $collections = Collection::orderBy('name','asc')->get();
         $subCategorys = SubCategory::orderBy('name','asc')->get();
         $productCode = $this->generateProductCode();
         return view('admin.product.main',[
@@ -35,7 +37,8 @@ class ProductController extends Controller
             'action' => $action,
             'brands' => $brands,
             'subCategorys' => $subCategorys,
-            'productCode' => $productCode
+            'productCode' => $productCode,
+            'collections' => $collections
         ]);
     }
 
@@ -44,6 +47,7 @@ class ProductController extends Controller
         $action = "edit";
         $product = Product::find($id);
         $brands = Brand::orderBy('name','asc')->get();
+        $collections = Collection::orderBy('name','asc')->get();
         $subCategorys = SubCategory::orderBy('name','asc')->get();
         $productCode = $product->product_code;
         return view('admin.product.main',[
@@ -52,7 +56,8 @@ class ProductController extends Controller
             'product' => $product,
             'brands' => $brands,
             'subCategorys' => $subCategorys,
-            'productCode' => $productCode
+            'productCode' => $productCode,
+            'collections' => $collections
         ]);
     }
 
@@ -65,6 +70,9 @@ class ProductController extends Controller
         $description = $request->description;
         $status = $request->has('status') ? 1 : 0;
         $isSale = $request->has('isSale') ? 1 : 0;
+        $isHot = $request->has('isHot') ? 1 : 0;
+        $isNew = $request->has('isNew') ? 1 : 0;
+        $collectionId = $request->collection;
         $content = $request->content;
         $action = $request->action;
 
@@ -110,6 +118,9 @@ class ProductController extends Controller
         $product->content = $content;
         $product->status = $status;
         $product->isSale = $isSale;
+        $product->isHot = $isHot;
+        $product->isNew = $isNew;
+        $product->collection_id = $collectionId;
         $product->save();
 
         return response()->json([

@@ -317,10 +317,7 @@ main{
 .my-slider .slick-arrow{
     top: 50%;
 }
-.section-sale-product,
-.section-category,
-.section-collection,
-.section-benefit{
+.section-index{
     position: relative;
     padding: 30px 0;
 }
@@ -509,6 +506,88 @@ main{
     color: #9aa5b3;
     text-decoration: line-through;
 }
+.item-product-badge{
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    z-index: 2;
+    width: 75px;
+}
+.item-product-badge span{
+    border-radius: 7px;
+    width: 75px;
+    display: inline-block;
+    height: 22px;
+    line-height: 21px;
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--txtHeader);
+    text-align: center;
+}
+.item-product-badge-new{
+    margin-bottom: 5px;
+    background-color: #f6a733;
+}
+.item-product-badge-best{
+    background-color: #af0102;
+}
+.item-product-vendor-color{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+.item-product-vendor{
+    color: #969696;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+.item-product-color span{
+    border: 1px solid var(--mainColor);
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+}
+.my-product .slick-arrow{
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+    line-height: 35px;
+}
+.my-product .slick-prev{
+    left: -5px;
+}
+.my-product .slick-next{
+    right: -5px;
+}
+.section-adv-first .container{
+    position: relative;
+}
+.item-adv-first-sub-title{
+    text-transform: uppercase;
+}
+.item-adv-first-title{
+    margin-bottom: 25px;
+    font-size: 30px;
+    line-height: 36px;
+    font-weight: 600;
+}
+.item-adv-first-image{
+    border-radius: 15px;
+    overflow: hidden;
+}
+.item-adv-first-bg{
+    position: absolute;
+    font-size: 245px;
+    top: -30px;
+    left: 0;
+    z-index: -1;
+    line-height: 150px;
+    color: #f8f8f8;
+    font-weight: 700;
+    text-transform: uppercase;
+}
 @media (min-width: 992px) {
     .slick-arrow:hover,
     .search-list a:hover,
@@ -545,6 +624,12 @@ main{
     }
     .item-product:hover .item-product-image::before {
         animation: shine 1s ease-in-out;
+    }
+    .section-adv-first{
+        padding-top: 95px;
+    }
+    .section-adv-first .row{
+        align-items: center;
     }
 }
 @media (max-width: 991px) {

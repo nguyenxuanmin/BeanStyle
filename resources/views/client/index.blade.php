@@ -6,7 +6,7 @@
 
 @section('content')
     @if (count($sliders))
-        <section class="section-slider">
+        <section class="section-index section-slider">
             <div class="my-slider">
                 @foreach ($sliders as $slider)
                     <div class="item-slider">
@@ -17,7 +17,7 @@
         </section>
     @endif
     @if (count($benefits))
-        <section class="section-benefit">
+        <section class="section-index section-benefit">
             <div class="container">
                 <div class="row">
                     @foreach ($benefits as $item)
@@ -38,7 +38,7 @@
         </section>
     @endif
     @if (count($collections))
-        <section class="section-collection">
+        <section class="section-index section-collection">
             <div class="container">
                 <div class="row">
                     @foreach ($collections as $item)
@@ -57,7 +57,7 @@
         </section>
     @endif
     @if (count($categories))
-        <section class="section-category">
+        <section class="section-index section-category">
             <div class="container">
                 <div class="item-category-title"><h2>Danh mục nổi bật</h2></div>
                 <div class="item-category">
@@ -80,7 +80,7 @@
         </section>
     @endif
     @if (count($saleProducts))
-        <section class="section-sale-product">
+        <section class="section-index section-sale-product">
             <div class="container">
                 <div class="item-sale-product">
                     <div class="item-sale-product-header">
@@ -106,12 +106,30 @@
                             @endphp
                             <div class="px-15">
                                 <div class="item-product">
+                                    <div class="item-product-badge">
+                                        @if ($item->isNew == 1)
+                                            <span class="item-product-badge-new">Hàng mới</span>
+                                        @endif
+                                        @if ($item->isHot == 1)
+                                            <span class="item-product-badge-best">Bán chạy</span>
+                                        @endif
+                                    </div>
                                     <div class="item-product-image">
                                         <a href="">
                                             <img src="{{asset('storage/products/'.$item->productColors[0]->productImages[0]->image)}}" alt="{{$item->name}}" class="w-100 h-100 object-fit-cover">
                                         </a>
                                     </div>
                                     <div class="item-product-info">
+                                        <div class="item-product-vendor-color">
+                                            <span class="item-product-vendor">{{$item->brand->name}}</span>
+                                            <div class="item-product-color">
+                                                @foreach ($item->productColors as $k => $productColor)
+                                                    @if ($k < 3)
+                                                        <span style="background: {{$productColor->color->color_code}};"></span>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
                                         <h3><a href="" title="{{$item->name}}">{{$item->name}}</a></h3>
                                         <span class="item-product-discount">{{number_format($discount, 0, ',', '.')}}đ</span><span class="item-product-flash-sale">-{{round($flashSale)}}%</span>
                                         <span class="item-product-price">{{number_format($price, 0, ',', '.')}}₫</span>
@@ -121,6 +139,25 @@
                         @endforeach
                     </div>
                 </div>
+            </div>
+        </section>
+    @endif
+    @if (isset($advFirst))
+        <section class="section-index section-adv-first">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-4 mb-3 lg-mb-0">
+                            <span class="item-adv-first-sub-title">Hàng mới về</span>
+                            <h2 class="item-adv-first-title">{{$advFirst->name}}</h2>
+                            <div class="item-adv-first-desc">{{$advFirst->description}}</div>
+                    </div>
+                    <div class="col-12 col-lg-8">
+                        <div class="item-adv-first-image">
+                            <img src="{{asset('storage/advertisements/'.$advFirst->image)}}" alt="{{$advFirst->name}}" class="w-100 h-100 object-fit-cover">
+                        </div>
+                    </div>
+                </div>
+                <span class="d-lg-block d-none item-adv-first-bg">Style</span>
             </div>
         </section>
     @endif

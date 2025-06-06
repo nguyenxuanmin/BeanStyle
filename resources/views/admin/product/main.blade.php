@@ -46,6 +46,14 @@
                                     <label class="form-label">Đang sale</label>
                                     <input type="checkbox" class="form-check-input" name="isSale" @if ((isset($product) && $product->isSale == 1)) checked @endif>
                                 </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Sản phẩm mới</label>
+                                    <input type="checkbox" class="form-check-input" name="isNew" @if ((isset($product) && $product->isNew == 1)) checked @endif>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Bán chạy</label>
+                                    <input type="checkbox" class="form-check-input" name="isHot" @if ((isset($product) && $product->isHot == 1)) checked @endif>
+                                </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="mb-3">
@@ -75,6 +83,21 @@
                                             @endforeach
                                         @else
                                             <option selected disabled value="">Chọn thương hiệu</option>
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Bộ sưu tập</label>
+                                    <select class="form-select" name="collection">
+                                        @if (isset($collections))
+                                            @if (!isset($product) || (isset($product) && empty($product->collection_id)))
+                                                <option selected disabled value="">Chọn bộ sưu tập</option>
+                                            @endif
+                                            @foreach ($collections as $item)
+                                                <option @if (isset($product) && $item->id == $product->collection_id) selected @endif value="{{$item->id}}">{{$item->name}}</option>
+                                            @endforeach
+                                        @else
+                                            <option selected disabled value="">Chọn bộ sưu tập</option>
                                         @endif
                                     </select>
                                 </div>

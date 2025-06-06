@@ -56,6 +56,11 @@
                         <i class="fa-solid fa-images"></i> <p>Bộ sưu tập</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('list_advertisement')}}" class="nav-link">
+                        <i class="fa-solid fa-rectangle-ad"></i> <p>Quảng cáo</p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

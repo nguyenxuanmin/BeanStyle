@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\ProductColorController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\BenefitController;
 use App\Http\Controllers\Admin\CollectionController;
+use App\Http\Controllers\Admin\AdvertisementController;
 use App\Http\Controllers\Client\HomeController;
 
 Route::group(['middleware' => [SystemAuth::class]], function () {
@@ -96,6 +97,13 @@ Route::group(['middleware' => [SystemAuth::class]], function () {
         Route::post('/collection/delete', [CollectionController::class, 'delete'])->name('delete_collection');
         Route::get('/collection/edit/{id}', [CollectionController::class, 'edit'])->name('edit_collection');
         Route::get('/collection/search', [CollectionController::class, 'search'])->name('search_collection');
+        // Quảng cáo
+        Route::get('/advertisement', [AdvertisementController::class, 'show'])->name('list_advertisement');
+        Route::get('/advertisement/add', [AdvertisementController::class, 'add'])->name('add_advertisement');
+        Route::post('/advertisement/save', [AdvertisementController::class, 'save'])->name('save_advertisement');
+        Route::post('/advertisement/delete', [AdvertisementController::class, 'delete'])->name('delete_advertisement');
+        Route::get('/advertisement/edit/{id}', [AdvertisementController::class, 'edit'])->name('edit_advertisement');
+        Route::get('/advertisement/search', [AdvertisementController::class, 'search'])->name('search_advertisement');
     });
     Route::group(['middleware' => [LoginAuth::class]], function () {
         Route::get('/admin/login', function () {return view('admin.login');})->name('login');

@@ -81,10 +81,64 @@ $(document).ready(function() {
             '<div class="slick-arrow slick-prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>',
         autoplay: true,
         arrows: true,
-        autoplaySpeed: 3000,
+        autoplaySpeed: 5000,
         responsive: [
             {
-            breakpoint: 1025,
+            breakpoint: 1026,
+                settings: {
+                    slidesToShow: 3
+                }
+            },
+            {
+            breakpoint: 992,
+                settings: {
+                    slidesToShow: 2
+                }
+            },
+            {
+            breakpoint: 600,
+                settings: {
+                    slidesToShow: 1
+                }
+            }
+        ]
+    });
+
+    $(".my-adv").slick({
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        autoplay: true,
+        arrows: false,
+        autoplaySpeed: 4000,
+        responsive: [
+            {
+            breakpoint: 1026,
+                settings: {
+                    slidesToShow: 2
+                }
+            },
+            {
+            breakpoint: 992,
+                settings: {
+                    slidesToShow: 1
+                }
+            }
+        ]
+    });
+
+    $(".my-blog").slick({
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        nextArrow:
+            '<div class="slick-arrow slick-next"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>',
+        prevArrow:
+            '<div class="slick-arrow slick-prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>',
+        autoplay: false,
+        arrows: true,
+        infinite: false,
+        responsive: [
+            {
+            breakpoint: 1026,
                 settings: {
                     slidesToShow: 3
                 }

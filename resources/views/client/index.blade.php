@@ -6,7 +6,7 @@
 
 @section('content')
     @if (count($sliders))
-        <section class="section-index section-slider">
+        <section class="section-slider">
             <div class="my-slider">
                 @foreach ($sliders as $slider)
                     <div class="item-slider">
@@ -42,7 +42,7 @@
             <div class="container">
                 <div class="row">
                     @foreach ($collections as $item)
-                        <div class="col-12 col-md-6 col-lg-3 mb-4 lg-mb-0">
+                        <div class="col-6 col-lg-3 mb-3 lg-mb-0">
                             <div class="item-collection">
                                 <img src="{{asset('storage/collections/'.$item->image)}}" alt="{{$item->name}}" class="w-100 h-100 object-fit-cover">
                                 <div class="item-collection-info">
@@ -110,7 +110,7 @@
                                         @if ($item->isNew == 1)
                                             <span class="item-product-badge-new">Hàng mới</span>
                                         @endif
-                                        @if ($item->isHot == 1)
+                                        @if ($item->isBestSeller == 1)
                                             <span class="item-product-badge-best">Bán chạy</span>
                                         @endif
                                     </div>
@@ -148,7 +148,7 @@
                 <div class="row">
                     <div class="col-12 col-lg-4 mb-3 lg-mb-0">
                             <span class="item-adv-first-sub-title">Hàng mới về</span>
-                            <h2 class="item-adv-first-title">{{$advFirst->name}}</h2>
+                            <h2 class="item-adv-first-title">@php echo $advFirst->name @endphp</h2>
                             <div class="item-adv-first-desc">{{$advFirst->description}}</div>
                     </div>
                     <div class="col-12 col-lg-8">
@@ -158,6 +158,65 @@
                     </div>
                 </div>
                 <span class="d-lg-block d-none item-adv-first-bg">Style</span>
+            </div>
+        </section>
+    @endif
+    <section class="section-index section-all-product">
+        <div class="container">
+            <div class="title-index">
+                <h2>
+                    <a href="" title="Tất Cả Sản Phẩm">Tất cả sản phẩm</a>
+                </h2>
+                <ul class="item-product-tab">
+                    <li data-status="new" class="active">Hàng mới về</li>
+                    <li data-status="best-seller">Sản phẩm bán chạy</li>
+                    <li data-status="hot">Sản phẩm nổi bật</li>
+                </ul>
+            </div>
+            <div id="allProduct">
+            </div>
+        </div>
+    </section>
+    @if (count($advs))
+        <section class="section-index section-adv">
+            <div class="container">
+               <div class="my-adv mx-15">
+                    @foreach ($advs as $item)
+                        <div class="px-15">
+                            <div class="item-adv-image">
+                                <img src="{{asset('storage/advertisements/'.$item->image)}}" alt="{{$item->name}}" class="object-fit-cover">
+                            </div>
+                        </div>
+                    @endforeach
+               </div>
+            </div>
+        </section>
+    @endif
+    @if (count($blogs))
+        <section class="section-index section-blog">
+            <div class="container">
+                <div class="title-index">
+                    <h2>
+                        <a href="" title="Tin tức mới nhất">Tin tức mới nhất</a>
+                    </h2>
+                    <p class="sub-title-index">Cập nhật những tin tức thời trang mới nhất</p>
+                </div>
+                <div class="my-blog mx-15">
+                    @foreach ($blogs as $item)
+                        <div class="item-blog px-15">
+                            <div class="item-blog-image">
+                                <a href="http://">
+                                    <img src="{{asset('storage/blogs/'.$item->image)}}" alt="{{$item->name}}" class="w-100 h-100 object-fit-cover">
+                                </a>
+                            </div>
+                            <div class="item-blog-info">
+                                <h3><a href="" title="{{$item->name}}">{{$item->name}}</a></h3>
+                                <p>{{$item->description}}</p>
+                                <a href="" class="read-more">Xem thêm >></a>
+                            </div>
+                        </div>
+                    @endforeach
+               </div>
             </div>
         </section>
     @endif

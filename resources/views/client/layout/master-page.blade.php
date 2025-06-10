@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         @if (!empty($company->favicon))
             <link rel="icon" href="{{asset('storage/company/favicon/'.$company->favicon)}}" type="favicon">
@@ -59,6 +60,61 @@
                         }
                         updateCountdown();
                         setInterval(updateCountdown, 1000);
+                    }
+                    if ($('.item-product-tab').length) {
+                        function fetchProducts(status) {
+                            $.ajax({
+                                url: '{{route('ajax_all_product')}}',
+                                method: 'GET',
+                                data: { status: status },
+                                success: function (html) {
+                                    $('#allProduct').html(html);
+                                    $(".my-all-product").slick({
+                                        rows: 2,
+                                        slidesPerRow: 5,
+                                        nextArrow:
+                                            '<div class="slick-arrow slick-next"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>',
+                                        prevArrow:
+                                            '<div class="slick-arrow slick-prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>',
+                                        autoplay: true,
+                                        arrows: true,
+                                        autoplaySpeed: 5000,
+                                        responsive: [
+                                            {
+                                            breakpoint: 1025,
+                                                settings: {
+                                                    slidesPerRow: 4,
+                                                }
+                                            },
+                                            {
+                                            breakpoint: 992,
+                                                settings: {
+                                                    slidesPerRow: 3,
+                                                }
+                                            },
+                                            {
+                                            breakpoint: 600,
+                                                settings: {
+                                                    slidesPerRow: 2,
+                                                }
+                                            }
+                                        ]
+                                    });
+                                },
+                                error: function (xhr, status, error) {
+                                    console.error('Lỗi khi tải sản phẩm:', error);
+                                }
+                            });
+                        }
+
+                        fetchProducts('new');
+
+                        $('.item-product-tab li').on('click', function () {
+                            const status = $(this).data('status');
+                            $('.item-product-tab li').removeClass('active');
+                            $(this).addClass('active');
+                            fetchProducts(status);
+                        });
                     }
                 });
             </script>

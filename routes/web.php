@@ -20,6 +20,9 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\BenefitController;
 use App\Http\Controllers\Admin\CollectionController;
 use App\Http\Controllers\Admin\AdvertisementController;
+use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\PolicyController;
+use App\Http\Controllers\Admin\InstructController;
 use App\Http\Controllers\Client\HomeController;
 
 Route::group(['middleware' => [SystemAuth::class]], function () {
@@ -104,6 +107,27 @@ Route::group(['middleware' => [SystemAuth::class]], function () {
         Route::post('/advertisement/delete', [AdvertisementController::class, 'delete'])->name('delete_advertisement');
         Route::get('/advertisement/edit/{id}', [AdvertisementController::class, 'edit'])->name('edit_advertisement');
         Route::get('/advertisement/search', [AdvertisementController::class, 'search'])->name('search_advertisement');
+        // Tin tức
+        Route::get('/blog', [BlogController::class, 'show'])->name('list_blog');
+        Route::get('/blog/add', [BlogController::class, 'add'])->name('add_blog');
+        Route::post('/blog/save', [BlogController::class, 'save'])->name('save_blog');
+        Route::post('/blog/delete', [BlogController::class, 'delete'])->name('delete_blog');
+        Route::get('/blog/edit/{id}', [BlogController::class, 'edit'])->name('edit_blog');
+        Route::get('/blog/search', [BlogController::class, 'search'])->name('search_blog');
+        // Chính sách
+        Route::get('/policy', [PolicyController::class, 'show'])->name('list_policy');
+        Route::get('/policy/add', [PolicyController::class, 'add'])->name('add_policy');
+        Route::post('/policy/save', [PolicyController::class, 'save'])->name('save_policy');
+        Route::post('/policy/delete', [PolicyController::class, 'delete'])->name('delete_policy');
+        Route::get('/policy/edit/{id}', [PolicyController::class, 'edit'])->name('edit_policy');
+        Route::get('/policy/search', [PolicyController::class, 'search'])->name('search_policy');
+        // Hướng dẫn
+        Route::get('/instruct', [InstructController::class, 'show'])->name('list_instruct');
+        Route::get('/instruct/add', [InstructController::class, 'add'])->name('add_instruct');
+        Route::post('/instruct/save', [InstructController::class, 'save'])->name('save_instruct');
+        Route::post('/instruct/delete', [InstructController::class, 'delete'])->name('delete_instruct');
+        Route::get('/instruct/edit/{id}', [InstructController::class, 'edit'])->name('edit_instruct');
+        Route::get('/instruct/search', [InstructController::class, 'search'])->name('search_instruct');
     });
     Route::group(['middleware' => [LoginAuth::class]], function () {
         Route::get('/admin/login', function () {return view('admin.login');})->name('login');
@@ -111,6 +135,7 @@ Route::group(['middleware' => [SystemAuth::class]], function () {
     });
 
     Route::get('/', [HomeController::class, 'index'])->name('index');
+    Route::get('/ajax-all-product', [HomeController::class, 'ajaxAllProduct'])->name('ajax_all_product');
 });
 
 Route::group(['middleware' => [CheckSystemAuth::class]], function () {

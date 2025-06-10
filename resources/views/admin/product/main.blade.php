@@ -48,11 +48,15 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Sản phẩm mới</label>
-                                    <input type="checkbox" class="form-check-input" name="isNew" @if ((isset($product) && $product->isNew == 1)) checked @endif>
+                                    <input type="checkbox" class="form-check-input" name="isNew" @if ((!isset($product) || isset($product) && $product->isNew == 1)) checked @endif>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Nổi bật</label>
+                                    <input type="checkbox" class="form-check-input" name="isHot" @if ((isset($product) && $product->isHot == 1)) checked @endif>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Bán chạy</label>
-                                    <input type="checkbox" class="form-check-input" name="isHot" @if ((isset($product) && $product->isHot == 1)) checked @endif>
+                                    <input type="checkbox" class="form-check-input" name="isBestSeller" @if ((isset($product) && $product->isBestSeller == 1)) checked @endif>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">

@@ -18,7 +18,7 @@ class ProductController extends Controller
     }
 
     public function show(){
-        $products = Product::with(['productSizes.size','brand','productColors.productImages'])->orderBy('product_code','asc')->paginate(20);
+        $products = Product::with(['productSizes.size','brand','productColors.productImages'])->orderBy('product_code','desc')->paginate(20);
         return view('admin.product.list',[
             'products' => $products,
             'infoSearch' => ''
@@ -72,6 +72,7 @@ class ProductController extends Controller
         $isSale = $request->has('isSale') ? 1 : 0;
         $isHot = $request->has('isHot') ? 1 : 0;
         $isNew = $request->has('isNew') ? 1 : 0;
+        $isBestSeller = $request->has('isBestSeller') ? 1 : 0;
         $collectionId = $request->collection;
         $content = $request->content;
         $action = $request->action;
@@ -120,6 +121,7 @@ class ProductController extends Controller
         $product->isSale = $isSale;
         $product->isHot = $isHot;
         $product->isNew = $isNew;
+        $product->isBestSeller = $isBestSeller;
         $product->collection_id = $collectionId;
         $product->save();
 
@@ -143,7 +145,7 @@ class ProductController extends Controller
         $products = Product::with(['productSizes.size','brand','productColors.productImages'])
         ->where('name','LIKE','%'.$infoSearch.'%')
         ->orWhere('product_code','LIKE','%'.$infoSearch.'%')
-        ->orderBy('product_code','asc')->paginate(20);
+        ->orderBy('product_code','desc')->paginate(20);
 
         return view('admin.product.list',[
             'infoSearch' => $infoSearch,

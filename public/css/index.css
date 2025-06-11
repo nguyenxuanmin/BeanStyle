@@ -451,6 +451,7 @@ main{
     justify-content: center;
     align-items: center;
     text-align: center;
+    color: #fff;
 }
 .item-sale-product-count-down p{
     background: var(--mainColor);
@@ -648,10 +649,24 @@ main{
     overflow: hidden;
     border-radius: 15px;
 }
+.item-blog img{
+    transition: all 0.3s ease-in-out;
+}
 .item-blog-image{
     position: relative;
     overflow: hidden;
     border-radius: 10px;
+}
+.item-blog-image span{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: var(--mainColor);
+    padding: 5px 10px;
+    border-bottom-right-radius: 10px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
 }
 .item-blog-info{
     margin-top: 10px;
@@ -695,6 +710,69 @@ main{
 .copyright a{
     color: var(--txtHeader);
 }
+.item-breadcrumb{
+    background: var(--bgBodySub);
+    margin-bottom: 30px;
+}
+.item-list-breadcrumb{
+    padding: 10px 0;
+    color: #666;
+    font-weight: 500;
+}
+.item-list-breadcrumb i{
+    font-size: 10px;
+    padding: 0 10px;
+}
+.item-list-breadcrumb a{
+    color: #666;
+}
+.item-list-breadcrumb span{
+    color: var(--mainColor);
+}
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    font-size: 14px;
+    font-weight: bold;
+}
+.pagination a {
+    color: #000;
+    padding: 8px 15px;
+}
+.pagination a.active {
+    background-color: var(--mainColor);;
+    color: #fff;
+    border-radius: 5px;
+}
+.pagination a:hover:not(.active) {
+    background-color: var(--bgBodySub);
+    border-radius: 5px;
+}
+.item-blog-detail-title{
+    font-weight: 700;
+    color: #333;
+    font-size: 26px;
+    margin-bottom: 5px;
+}
+.item-blog-detail-date{
+    color: #747474;
+}
+.item-blog-detail-date span{
+    display: inline-block;
+    padding-right: 15px;
+    margin-bottom: 10px;
+}
+.item-blog-detail-date i{
+    padding-right: 5px;
+}
+.title-detail{
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--textColor);
+    margin-bottom: 15px;
+}
 @media (min-width: 992px) {
     .slick-arrow:hover,
     .search-list a:hover,
@@ -702,6 +780,7 @@ main{
         color: #fff;
         background: var(--mainColor);
     }
+    .item-list-breadcrumb a:hover,
     .mid-footer a:hover,
     .read-more:hover,
     .item-blog-info h3 a:hover,
@@ -742,6 +821,10 @@ main{
     }
     .section-adv-first .row{
         align-items: center;
+    }
+    .item-blog:hover img{
+        transform: scale(1.1);
+        transition: all 0.3s ease-in-out;
     }
 }
 @media (max-width: 991px) {

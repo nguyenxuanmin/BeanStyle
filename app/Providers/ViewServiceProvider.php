@@ -24,11 +24,9 @@ class ViewServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer(['client.layout.header'], function ($view) {
-            $currentUrl = request()->path();
             $categories = Category::with('subCategories')->orderBy('name','asc')->get();
             $view->with([
-                'categories' => $categories,
-                'currentUrl' => $currentUrl
+                'categories' => $categories
             ]);
         });
 

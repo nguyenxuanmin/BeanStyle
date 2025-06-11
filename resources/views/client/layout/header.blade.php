@@ -59,13 +59,13 @@
         <div class="container">
             <ul class="item-nav">
                 <li>
-                    <a href="" title="Trang chủ" @if (strpos($currentUrl, '') !== false) class="active" @endif>Trang chủ</a>
+                    <a href="{{route('index')}}" title="Trang chủ" @if (request()->is('/')) class="active" @endif>Trang chủ</a>
                 </li>
                 <li>
-                    <a href="" title="Giới thiệu" @if (strpos($currentUrl, 'gioi-thieu') !== false) class="active" @endif>Giới thiệu</a>
+                    <a href="" title="Giới thiệu" @if (request()->is('gioi-thieu')) class="active" @endif>Giới thiệu</a>
                 </li>
                 <li>
-                    <a id="displayDropdown" href="" title="Sản phẩm" @if (strpos($currentUrl, 'san-pham') !== false) class="active" @endif>Sản phẩm <i class="fa-solid fa-chevron-down"></i></a>
+                    <a id="displayDropdown" href="" title="Sản phẩm" @if (request()->is('san-pham')) class="active" @endif>Sản phẩm <i class="fa-solid fa-chevron-down"></i></a>
                     <div class="dropdown-content">
                         <div class="container">
                             <div class="row">
@@ -90,10 +90,10 @@
                     </div>
                 </li>
                 <li>
-                    <a href="" title="Tin tức" @if (strpos($currentUrl, 'tin-tuc') !== false) class="active" @endif>Tin tức</a>
+                    <a href="{{route('blog')}}" title="Tin tức" @if (request()->is('tin-tuc*')) class="active" @endif>Tin tức</a>
                 </li>
                 <li>
-                    <a href="" title="Liên hệ" @if (strpos($currentUrl, 'lien-he') !== false) class="active" @endif>Liên hệ</a>
+                    <a href="" title="Liên hệ" @if (request()->is('lien-he')) class="active" @endif>Liên hệ</a>
                 </li>
             </ul>
         </div>
@@ -111,13 +111,13 @@
         </div>
         <ul class="item-nav-mobile">
             <li>
-                <a href="" title="Trang chủ" @if (strpos($currentUrl, '') !== false) class="active" @endif>Trang chủ</a>
+                <a href="{{route('index')}}" title="Trang chủ" @if (request()->is('/')) class="active" @endif>Trang chủ</a>
             </li>
             <li>
-                <a href="" title="Giới thiệu" @if (strpos($currentUrl, 'gioi-thieu') !== false) class="active" @endif>Giới thiệu</a>
+                <a href="" title="Giới thiệu" @if (request()->is('gioi-thieu')) class="active" @endif>Giới thiệu</a>
             </li>
             <li>
-                <a href="#" title="Sản phẩm" @if (strpos($currentUrl, 'san-pham') !== false) class="active" @endif>Sản phẩm</a>
+                <a href="#" title="Sản phẩm" @if (request()->is('san-pham')) class="active" @endif>Sản phẩm</a>
                 <i class="fa-solid fa-angle-right toggle"></i>
 
                 <ul class="sub-menu ps-2" style="display: none;">
@@ -140,10 +140,10 @@
                 </ul>
             </li>
             <li>
-                <a href="" title="Tin tức" @if (strpos($currentUrl, 'tin-tuc') !== false) class="active" @endif>Tin tức</a>
+                <a href="{{route('blog')}}" title="Tin tức" @if (request()->is('tin-tuc*')) class="active" @endif>Tin tức</a>
             </li>
             <li>
-                <a href="" title="Liên hệ" @if (strpos($currentUrl, 'lien-he') !== false) class="active" @endif>Liên hệ</a>
+                <a href="" title="Liên hệ" @if (request()->is('lien-he')) class="active" @endif>Liên hệ</a>
             </li>
         </ul>
     </div>

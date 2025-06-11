@@ -23,7 +23,9 @@ use App\Http\Controllers\Admin\AdvertisementController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\PolicyController;
 use App\Http\Controllers\Admin\InstructController;
+use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\ClientBlogController;
 
 Route::group(['middleware' => [SystemAuth::class]], function () {
     Route::group(['middleware' => [AdminAuth::class]], function () {
@@ -128,6 +130,9 @@ Route::group(['middleware' => [SystemAuth::class]], function () {
         Route::post('/instruct/delete', [InstructController::class, 'delete'])->name('delete_instruct');
         Route::get('/instruct/edit/{id}', [InstructController::class, 'edit'])->name('edit_instruct');
         Route::get('/instruct/search', [InstructController::class, 'search'])->name('search_instruct');
+        // Công ty
+        Route::get('/company', [CompanyController::class, 'show'])->name('company');
+        Route::post('/company/save', [CompanyController::class, 'save'])->name('save_company');
     });
     Route::group(['middleware' => [LoginAuth::class]], function () {
         Route::get('/admin/login', function () {return view('admin.login');})->name('login');
@@ -136,6 +141,8 @@ Route::group(['middleware' => [SystemAuth::class]], function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('index');
     Route::get('/ajax-all-product', [HomeController::class, 'ajaxAllProduct'])->name('ajax_all_product');
+    Route::get('/tin-tuc', [ClientBlogController::class, 'show'])->name('blog');
+    Route::get('/tin-tuc/{slug}', [ClientBlogController::class, 'detail'])->name('blog_detail');
 });
 
 Route::group(['middleware' => [CheckSystemAuth::class]], function () {

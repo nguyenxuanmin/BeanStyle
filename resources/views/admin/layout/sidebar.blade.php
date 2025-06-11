@@ -76,6 +76,11 @@
                         <p>Hướng dẫn</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('company')}}" class="nav-link">
+                        <p>Thông tin công ty</p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

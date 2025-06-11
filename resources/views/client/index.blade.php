@@ -91,7 +91,7 @@
                             </a>
                         </h2>
                         <div class="item-sale-product-count-down" id="countdown">
-                            <p><span id="countdownDays">0</span><span>Ngày</span></p>
+                            <p><span id="countdownDays">0</span> <span>Ngày</span></p>
                             <p><span id="countdownHours">0</span></p>
                             <p><span id="countdownMinutes">0</span></p>
                             <p><span id="countdownSeconds">0</span></p>
@@ -197,7 +197,7 @@
             <div class="container">
                 <div class="title-index">
                     <h2>
-                        <a href="" title="Tin tức mới nhất">Tin tức mới nhất</a>
+                        <a href="{{route('blog')}}" title="Tin tức mới nhất">Tin tức mới nhất</a>
                     </h2>
                     <p class="sub-title-index">Cập nhật những tin tức thời trang mới nhất</p>
                 </div>
@@ -205,14 +205,15 @@
                     @foreach ($blogs as $item)
                         <div class="item-blog px-15">
                             <div class="item-blog-image">
-                                <a href="http://">
+                                <a href="{{route('blog_detail',$item->slug)}}">
                                     <img src="{{asset('storage/blogs/'.$item->image)}}" alt="{{$item->name}}" class="w-100 h-100 object-fit-cover">
+                                    <span>{{$item->created_at->format('d-m-Y')}}</span>
                                 </a>
                             </div>
                             <div class="item-blog-info">
-                                <h3><a href="" title="{{$item->name}}">{{$item->name}}</a></h3>
+                                <h3><a href="{{route('blog_detail',$item->slug)}}" title="{{$item->name}}">{{$item->name}}</a></h3>
                                 <p>{{$item->description}}</p>
-                                <a href="" class="read-more">Xem thêm >></a>
+                                <a href="{{route('blog_detail',$item->slug)}}" class="read-more">Xem thêm >></a>
                             </div>
                         </div>
                     @endforeach

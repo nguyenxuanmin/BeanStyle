@@ -36,31 +36,34 @@
             <script>
                 $(document).ready(function() {
                     if ($('#countdown').length) {
-                        var endDate = new Date();
-                        endDate.setDate(endDate.getDate() + 200);
+                        @if (!empty($company->sale_date))
+                            var endDate = new Date("{{$company->sale_date->toIso8601String()}}");
+                            function updateCountdown() {
+                                var now = new Date();
+                                var diff = endDate - now;
 
-                        function updateCountdown() {
-                            var now = new Date();
-                            var diff = endDate - now;
+                                if (diff <= 0) {
+                                    $('#countdown').html("<b>Đã kết thúc!</b>");
+                                    return;
+                                }
 
-                            if (diff <= 0) {
-                                $('#countdown').html("Đã kết thúc!");
-                                return;
+                                var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                                var hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                                var minutes = Math.floor((diff / 1000 / 60) % 60);
+                                var seconds = Math.floor((diff / 1000) % 60);
+
+                                $('#countdownDays').text(days);
+                                $('#countdownHours').text(String(hours).padStart(2, '0'));
+                                $('#countdownMinutes').text(String(minutes).padStart(2, '0'));
+                                $('#countdownSeconds').text(String(seconds).padStart(2, '0'));
                             }
-
-                            var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                            var hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-                            var minutes = Math.floor((diff / 1000 / 60) % 60);
-                            var seconds = Math.floor((diff / 1000) % 60);
-
-                            $('#countdownDays').text(days);
-                            $('#countdownHours').text(String(hours).padStart(2, '0'));
-                            $('#countdownMinutes').text(String(minutes).padStart(2, '0'));
-                            $('#countdownSeconds').text(String(seconds).padStart(2, '0'));
-                        }
-                        updateCountdown();
-                        setInterval(updateCountdown, 1000);
+                            updateCountdown();
+                            setInterval(updateCountdown, 1000);
+                        @else
+                            $('#countdown').html("<b>Đã kết thúc!</b>");
+                        @endif
                     }
+
                     if ($('.item-product-tab').length) {
                         function fetchProducts(status) {
                             $.ajax({

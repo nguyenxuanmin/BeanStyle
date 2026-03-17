@@ -24,6 +24,8 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\PolicyController;
 use App\Http\Controllers\Admin\InstructController;
 use App\Http\Controllers\Admin\CompanyController;
+use App\Http\Controllers\Admin\AboutUsController;
+use App\Http\Controllers\Admin\WhyChooseUsItemController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\ClientBlogController;
 
@@ -133,6 +135,16 @@ Route::group(['middleware' => [SystemAuth::class]], function () {
         // Công ty
         Route::get('/company', [CompanyController::class, 'show'])->name('company');
         Route::post('/company/save', [CompanyController::class, 'save'])->name('save_company');
+        // Về chúng tôi
+        Route::get('/about-us', [AboutUsController::class, 'show'])->name('about_us');
+        Route::post('/about-us/save', [AboutUsController::class, 'save'])->name('save_about_us');
+        // Tại sao chọn chúng tôi
+        Route::get('/why-choose-us', [WhyChooseUsItemController::class, 'show'])->name('list_why_choose_us');
+        Route::get('/why-choose-us/add', [WhyChooseUsItemController::class, 'add'])->name('add_why_choose_us');
+        Route::post('/why-choose-us/save', [WhyChooseUsItemController::class, 'save'])->name('save_why_choose_us');
+        Route::post('/why-choose-us/delete', [WhyChooseUsItemController::class, 'delete'])->name('delete_why_choose_us');
+        Route::get('/why-choose-us/edit/{id}', [WhyChooseUsItemController::class, 'edit'])->name('edit_why_choose_us');
+        Route::get('/why-choose-us/search', [WhyChooseUsItemController::class, 'search'])->name('search_why_choose_us');
     });
     Route::group(['middleware' => [LoginAuth::class]], function () {
         Route::get('/admin/login', function () {return view('admin.login');})->name('login');

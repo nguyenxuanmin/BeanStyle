@@ -37,7 +37,7 @@
 			</div>
         </div>
     </div>
-    @if (isset($aboutUs))
+    @if ($aboutUs)
         <div class="about-us">
             <div class="container">
                 <div class="row">

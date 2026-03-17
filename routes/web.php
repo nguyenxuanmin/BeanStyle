@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\AboutUsController;
 use App\Http\Controllers\Admin\WhyChooseUsItemController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\ClientBlogController;
+use App\Http\Controllers\Client\ClientIntroductionController;
 
 Route::group(['middleware' => [SystemAuth::class]], function () {
     Route::group(['middleware' => [AdminAuth::class]], function () {
@@ -155,6 +156,7 @@ Route::group(['middleware' => [SystemAuth::class]], function () {
     Route::get('/ajax-all-product', [HomeController::class, 'ajaxAllProduct'])->name('ajax_all_product');
     Route::get('/tin-tuc', [ClientBlogController::class, 'show'])->name('blog');
     Route::get('/tin-tuc/{slug}', [ClientBlogController::class, 'detail'])->name('blog_detail');
+    Route::get('/gioi-thieu', [ClientIntroductionController::class, 'show'])->name('introduction');
 });
 
 Route::group(['middleware' => [CheckSystemAuth::class]], function () {

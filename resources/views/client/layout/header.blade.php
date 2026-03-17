@@ -62,7 +62,7 @@
                     <a href="{{route('index')}}" title="Trang chủ" @if (request()->is('/')) class="active" @endif>Trang chủ</a>
                 </li>
                 <li>
-                    <a href="" title="Giới thiệu" @if (request()->is('gioi-thieu')) class="active" @endif>Giới thiệu</a>
+                    <a href="{{route('introduction')}}" title="Giới thiệu" @if (request()->is('gioi-thieu')) class="active" @endif>Giới thiệu</a>
                 </li>
                 <li>
                     <a id="displayDropdown" href="" title="Sản phẩm" @if (request()->is('san-pham')) class="active" @endif>Sản phẩm <i class="fa-solid fa-chevron-down"></i></a>
@@ -114,7 +114,7 @@
                 <a href="{{route('index')}}" title="Trang chủ" @if (request()->is('/')) class="active" @endif>Trang chủ</a>
             </li>
             <li>
-                <a href="" title="Giới thiệu" @if (request()->is('gioi-thieu')) class="active" @endif>Giới thiệu</a>
+                <a href="{{route('introduction')}}" title="Giới thiệu" @if (request()->is('gioi-thieu')) class="active" @endif>Giới thiệu</a>
             </li>
             <li>
                 <a href="#" title="Sản phẩm" @if (request()->is('san-pham')) class="active" @endif>Sản phẩm</a>

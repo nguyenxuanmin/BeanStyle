@@ -65,7 +65,7 @@
                     <a href="{{route('introduction')}}" title="Giới thiệu" @if (request()->is('gioi-thieu')) class="active" @endif>Giới thiệu</a>
                 </li>
                 <li>
-                    <a id="displayDropdown" href="" title="Sản phẩm" @if (request()->is('san-pham')) class="active" @endif>Sản phẩm <i class="fa-solid fa-chevron-down"></i></a>
+                    <a id="displayDropdown" href="{{route('product')}}" title="Sản phẩm" @if (request()->is('san-pham*')) class="active" @endif>Sản phẩm <i class="fa-solid fa-chevron-down"></i></a>
                     <div class="dropdown-content">
                         <div class="container">
                             <div class="row">

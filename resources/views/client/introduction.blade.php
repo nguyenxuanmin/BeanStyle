@@ -59,4 +59,31 @@
             </div>
         </div>
     @endif
+    <div class="why-choose-us">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-12 order-lg-2">
+                    <div class="why-choose-us-image">
+                        <img src="{{asset('library/client/why-choose-us.webp')}}" alt="Tại sao chọn chúng tôi" class="img-fluid object-fit-cover">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12 order-lg-1">
+                    <div class="item-category-title"><h2>LÝ DO CHỌN CHÚNG TÔI</h2></div>
+                    <p class="why-choose-us-title">Tại sao chọn Bean Style?</p>
+                    <div class="row">
+                    @foreach ($whyChooseUsItems as $item)
+                        <div class="col-md-6 col-12">
+                            <div class="why-choose-us-content">
+                                <h3>{{ $item->title }}</h3>
+                                <p>{{ $item->description }}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                </div>
+               
+            </div>
+            
+        </div>
+    </div>
 @endsection

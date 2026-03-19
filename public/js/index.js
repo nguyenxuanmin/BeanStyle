@@ -59,6 +59,24 @@ $(document).ready(function() {
             }
         }
     });
+    $('.category-navbar li i').on('click', function (e) {
+        e.preventDefault();
+        const iconCategory = $(this);
+        const subCategory = iconCategory[0].nextElementSibling;
+        const parentIconCategory = iconCategory[0].parentElement;
+        const isHidden = subCategory.style.maxHeight === '0px' || subCategory.style.maxHeight === '';
+        if (isHidden) {
+            subCategory.style.maxHeight = subCategory.scrollHeight + 'px';
+            iconCategory[0].classList.remove('fa-plus');
+            iconCategory[0].classList.add('fa-minus');
+            parentIconCategory.classList.add('active');
+        } else {
+            subCategory.style.maxHeight = '0px';
+            iconCategory[0].classList.remove('fa-minus');
+            iconCategory[0].classList.add('fa-plus');
+            parentIconCategory.classList.remove('active');
+        }
+    });
     if ($('.my-slider').length) {
         $('.my-slider').slick({
             slidesToShow: 1,

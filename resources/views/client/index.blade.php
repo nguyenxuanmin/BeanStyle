@@ -184,7 +184,7 @@
                     @foreach ($advs as $item)
                         <div class="px-15">
                             <div class="item-adv-image">
-                                <img src="{{asset('storage/advertisements/'.$item->image)}}" alt="{{$item->name}}" class="object-fit-cover">
+                                <img src="{{asset('storage/advertisements/'.$item->image)}}" alt="{{$item->name}}" class="img-fluid object-fit-cover">
                             </div>
                         </div>
                     @endforeach

@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Storage;
 class AdminService
 {
     public function generateSlug($title) {
-        $slug = strtolower($title);
+        $slug = mb_strtolower($title, 'UTF-8');
         $slug = preg_replace('~[áàạảãâấầậẩẫăắằặẳẵ]~u', 'a', $slug);
         $slug = preg_replace('~[éèẹẻẽêếềệểễ]~u', 'e', $slug);
         $slug = preg_replace('~[íìịỉĩ]~u', 'i', $slug);

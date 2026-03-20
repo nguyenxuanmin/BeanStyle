@@ -158,7 +158,9 @@ Route::group(['middleware' => [SystemAuth::class]], function () {
     Route::get('/tin-tuc', [ClientBlogController::class, 'show'])->name('blog');
     Route::get('/tin-tuc/{slug}', [ClientBlogController::class, 'detail'])->name('blog_detail');
     Route::get('/gioi-thieu', [ClientIntroductionController::class, 'show'])->name('introduction');
-    Route::get('/san-pham', [ClientProductController::class, 'showall'])->name('product');
+    Route::get('/san-pham', [ClientProductController::class, 'showAll'])->name('product');
+    Route::get('/san-pham/{slug}', [ClientProductController::class, 'showCategory'])->name('category');
+    Route::get('/san-pham/{slugCategory}/{slug}', [ClientProductController::class, 'showSubCategory'])->name('sub_category');
 });
 
 Route::group(['middleware' => [CheckSystemAuth::class]], function () {

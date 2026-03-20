@@ -59,6 +59,7 @@ $(document).ready(function() {
             }
         }
     });
+    
     $('.category-navbar li i').on('click', function (e) {
         e.preventDefault();
         const iconCategory = $(this);
@@ -77,6 +78,18 @@ $(document).ready(function() {
             parentIconCategory.classList.remove('active');
         }
     });
+
+    $('.category-navbar li.active').each(function() {
+        const liActive = $(this);
+        const iconCategory = liActive.find('i');
+        const subCategory = iconCategory[0].nextElementSibling;
+        if (subCategory && subCategory.tagName === 'UL') {
+            subCategory.style.maxHeight = subCategory.scrollHeight + 'px';
+            iconCategory[0].classList.remove('fa-plus');
+            iconCategory[0].classList.add('fa-minus');
+        }
+    });
+
     if ($('.my-slider').length) {
         $('.my-slider').slick({
             slidesToShow: 1,

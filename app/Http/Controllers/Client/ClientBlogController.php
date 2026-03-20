@@ -20,14 +20,14 @@ class ClientBlogController extends Controller
     public function detail($slug){
         $blog = Blog::where('slug',$slug)->firstOrFail();
         $titlePage = $blog->name;
-        $category = "Tin tức";
-        $categoryLink = "blog";
+        $breadcrumb1 = "Tin tức";
+        $breadcrumbLink1 = route('blog');
         $otherBlogs = Blog::where('id','<>',$blog->id)->orderBy('created_at','desc')->limit(8)->get();
         return view('client.blog-detail',[
             'blog' => $blog,
             'titlePage' => $titlePage,
-            'category' => $category,
-            'categoryLink' => $categoryLink,
+            'breadcrumb1' => $breadcrumb1,
+            'breadcrumbLink1' => $breadcrumbLink1,
             'otherBlogs' => $otherBlogs
         ]);
     }

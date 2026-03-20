@@ -897,6 +897,7 @@ main{
     cursor: pointer;
     font-size: 14px;
 }
+.category-navbar li .active-sub-category a,
 .category-navbar li.active a.nav-link-lv1,
 .category-navbar li.active i,
 .sub-category-navbar li a:hover,

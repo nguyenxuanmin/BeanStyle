@@ -73,11 +73,11 @@
                                     <div class="col-3 mb-3">
                                         <ul>
                                             <li>
-                                                <a class="link-level-1" href="" title="{{$category->name}}">{{$category->name}}</a>
+                                                <a class="link-level-1" href="{{route('category',$category->slug)}}" title="{{$category->name}}">{{$category->name}}</a>
                                                 <ul>
                                                     @foreach ($category->subCategories as $subCategory)
                                                         <li>
-                                                            <a href="" title="{{$subCategory->name}}">{{$subCategory->name}}</a>
+                                                            <a href="{{route('sub_category',[$category->slug,$subCategory->slug])}}" title="{{$subCategory->name}}">{{$subCategory->name}}</a>
                                                         </li>
                                                     @endforeach
                                                 </ul>
@@ -123,14 +123,14 @@
                 <ul class="sub-menu ps-2" style="display: none;">
                     @foreach ($categories as $category)
                         <li>
-                            <a href="#" title="{{ $category->name }}">{{ $category->name }}</a>
+                            <a href="{{route('category',$category->slug)}}" title="{{ $category->name }}">{{ $category->name }}</a>
 
                             @if (count($category->subCategories))
                                 <i class="fa-solid fa-angle-right toggle"></i>
                                 <ul class="sub-menu ps-2" style="display: none;">
                                     @foreach ($category->subCategories as $subCategory)
                                         <li>
-                                            <a href="#" title="{{ $subCategory->name }}">{{ $subCategory->name }}</a>
+                                            <a href="{{route('sub_category',[$category->slug,$subCategory->slug])}}" title="{{ $subCategory->name }}">{{ $subCategory->name }}</a>
                                         </li>
                                     @endforeach
                                 </ul>
